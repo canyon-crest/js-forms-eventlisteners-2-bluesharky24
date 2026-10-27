@@ -67,12 +67,12 @@ document.getElementById("btnCalc").addEventListener("click", function(){
             count++;
         }
     }
-    count *= 0.5; 
+    count *= 0.50; 
 
     let fee = 0;
     let service = document.getElementById("serviceSelect").value;
     if(service === "dinein"){
-        fee = 0;
+        fee = 0.00;
     }
     else if(service === "takeout"){
         fee = 1.50;
@@ -87,7 +87,7 @@ document.getElementById("btnCalc").addEventListener("click", function(){
         name = "Customer";
     }
 
-    document.getElementById("myPara").innerHTML = name + ", your total is $" + total;
+    document.getElementById("myPara").innerHTML = name + ", your total is $" + total.toFixed(2);
 });
 
 //   a) Get the selected size price:
