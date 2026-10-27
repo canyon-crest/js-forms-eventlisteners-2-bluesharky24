@@ -17,9 +17,17 @@
 
 // STEP 1: Get the "Shout" button by its ID ("btnShout")
 //         using document.getElementById()
+let btn = document.getElementById("btnShout");
 
 // STEP 2: Add a click event listener to the button.
 //         Inside the listener function:
+btn.addEventListener("click", function(){
+    let a = document.getElementById("shoutInput").value;
+    a = a.toUpperCase();
+    a += "!";
+    let b = document.getElementById("outShout");
+    b.innerHTML = a;
+});
 //         a) Get the text from the input with ID "shoutInput"
 //            using .value
 //         b) Convert the text to uppercase using .toUpperCase()
@@ -43,6 +51,44 @@
 // STEP 3: Get the "Calculate Total" button by ID ("btnCalc")
 //         Add a click event listener.
 //         Inside the listener:
+
+document.getElementById("btnCalc").addEventListener("click", function(){
+    let topping = document.getElementsByName("rg");
+    let size = 0;
+    for(let i = 0; i<topping.length; i++){
+        if(topping[i].checked){
+            size = parseFloat(topping[i].value);
+        }
+    }
+    let count = 0;
+    let cb = document.getElementsByName("cb");
+    for(let i = 0; i<cb.length; i++){
+        if(cb[i].checked){
+            count++;
+        }
+    }
+    count *= 0.5; 
+
+    let fee = 0;
+    let service = document.getElementById("serviceSelect").value;
+    if(service === "dinein"){
+        fee = 0;
+    }
+    else if(service === "takeout"){
+        fee = 1.50;
+    }
+    else{
+        fee = 3.00; 
+    }
+    let total = size + count + fee; 
+    let name = "";
+    name = document.getElementById("myInput").value;
+    if(name === ""){
+        name = "Customer";
+    }
+
+    document.getElementById("myPara").innerHTML = name + ", your total is $" + total;
+});
 
 //   a) Get the selected size price:
 //      Use document.getElementsByName("rg") to get all
@@ -83,3 +129,14 @@
 //         c) Uncheck ALL topping checkboxes (loop through them)
 //         d) Set the service dropdown value to "dinein"
 //         e) Set the output paragraph innerHTML to ""
+
+document.getElementById("clearBtn").addEventListener("click", function(){
+    document.getElementById("myInput").value = "";
+    document.getElementById("r3").checked = true;
+    let cb = document.getElementsByName("cb");
+    for(let i = 0; i<cb.length; i++){
+        cb[i].checked = false;
+    }
+    document.getElementById("serviceSelect").value = "dinein";
+    document.getElementById("myPara").innerHTML = "";
+});
